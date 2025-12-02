@@ -16,7 +16,7 @@ class PaisController extends Controller
     {
         //
         $paises = Pais::all();
-        return view('paises.index', compact('paises')) -> with('message', 'El país ha sido Creado exitosamente');
+        return view('paises.index', compact('paises'));
     }
 
     /**
@@ -25,7 +25,7 @@ class PaisController extends Controller
     public function create()
     {
         //
-        return view('paises.nuevo') -> with('message', 'El país ha sido creado exitosamente');
+        return view('paises.nuevo');
     }
 
     /**
@@ -38,7 +38,7 @@ class PaisController extends Controller
             'pais' => $request->pais
         ];
         Pais::create($pais);
-        return redirect()->route('paises.index')->with('success', 'El país ha sido creado');
+        return redirect()->route('paises.index');
     }
 
     /**
@@ -56,7 +56,7 @@ class PaisController extends Controller
     {
         //
         $pais = Pais::find($id);
-        return view('paises.editar', compact('pais'))-> with('message', 'El país ha sido actualizado exitosamente');
+        return view('paises.editar', compact('pais'));
     }
 
     /**
@@ -68,7 +68,7 @@ class PaisController extends Controller
         $pais = Pais::find($id);
         $pais->pais = $request->pais;
         $pais->save();
-        return redirect()->route('paises.index')->with('success', 'El país ha sido actualizado');
+        return redirect()->route('paises.index');
     }
 
     /**
@@ -79,6 +79,6 @@ class PaisController extends Controller
         //
         $pais = Pais::find($id);
         $pais->delete();
-        return redirect()->route('paises.index')->with('success', 'El país ha sido eliminado');
+        return redirect()->route('paises.index');
     }
 }
