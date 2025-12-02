@@ -22,10 +22,10 @@ class Deportista extends Model
     // Relaciones
     public function pais()
     {
-        return $this->belongsTo(Pais::class);
+        return $this->belongsTo(Pais::class , 'id_pais');
     }
     public function disciplina()
     {
-        return $this->belongsTo(Disciplina::class);
+        return $this->belongsTo(Disciplina::class , 'id_disciplina');
     }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Deportista;
+use App\Models\Pais;
+use App\Models\Disciplina;
 
 class DeportistaController extends Controller
 {
@@ -25,7 +27,9 @@ class DeportistaController extends Controller
     public function create()
     {
         //
-        return view('deportista.nuevo');
+        $paises = Pais::all();
+        $disciplinas = Disciplina::all();
+        return view('deportista.nuevo', compact('paises', 'disciplinas'));
     }
 
     /**
@@ -61,7 +65,9 @@ class DeportistaController extends Controller
     {
         //
         $deportista = Deportista::find($id);
-        return view('deportista.editar', compact('deportista'));
+        $paises = Pais::all();
+        $disciplinas = Disciplina::all();
+        return view('deportista.editar', compact('deportista', 'paises', 'disciplinas'));
     }
 
     /**
