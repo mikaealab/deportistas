@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Disciplina;
+
 class DisciplinaController extends Controller
 {
     /**
@@ -13,6 +15,8 @@ class DisciplinaController extends Controller
     public function index()
     {
         //
+        $disciplinas = Disciplina::all();
+        return view('disciplina.index', compact('disciplinas'));
     }
 
     /**
@@ -21,6 +25,7 @@ class DisciplinaController extends Controller
     public function create()
     {
         //
+        return view('disciplina.nuevo');
     }
 
     /**
@@ -29,6 +34,11 @@ class DisciplinaController extends Controller
     public function store(Request $request)
     {
         //
+        $disciplina = [
+            'disciplina' => $request->disciplina
+        ];
+        Disciplina::create($disciplina);
+        return redirect()->route('disciplina.index')->with('success', 'La disciplina ha sido creada');
     }
 
     /**
@@ -45,6 +55,8 @@ class DisciplinaController extends Controller
     public function edit(string $id)
     {
         //
+        $disciplina = Disciplina::find($id);
+        return view('disciplina.editar', compact('disciplina'));
     }
 
     /**
@@ -53,6 +65,10 @@ class DisciplinaController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $disciplina = Disciplina::find($id);
+        $disciplina->disciplina = $request->disciplina;
+        $disciplina->save();
+        return redirect()->route('disciplina.index')->with('success', 'La disciplina ha sido actualizada');
     }
 
     /**
@@ -61,5 +77,8 @@ class DisciplinaController extends Controller
     public function destroy(string $id)
     {
         //
+        $disciplina = Disciplina::find($id);
+        $disciplina->delete();
+        return redirect()->route('disciplina.index')->with('success', 'La disciplina ha sido eliminada');
     }
 }
