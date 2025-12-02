@@ -26,9 +26,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="{{ asset('real/css/bootstrap.min.css') }}" rel="stylesheet">
-
     
-
     <!-- Main CSS -->
     <link href="{{ asset('real/css/style.css') }}" rel="stylesheet">
 
