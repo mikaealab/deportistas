@@ -64,7 +64,6 @@
                         <a href="{{ route('disciplina.index') }}" class="nav-item nav-link">Disciplinas</a>
                         <a href="{{ route('deportista.index') }}" class="nav-item nav-link">Deportistas</a>
                     </div>
-                    <a href="#" class="btn btn-primary px-3 d-none d-lg-flex">Agregar Propiedad</a>
                 </div>
             </nav>
         </div>

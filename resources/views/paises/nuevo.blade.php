@@ -1,3 +1,6 @@
+@extends('layout.app')
+
+@section('Contenido')
 <div class="container">
     <h2>Nuevo País</h2>
 
@@ -13,4 +16,5 @@
         <a href="{{ route('paises.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
+@endsection
 
