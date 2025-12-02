@@ -1,79 +1,134 @@
 @extends('layout.app')
 
 @section('Contenido')
-<div class="container">
-    <h2>Listado de Países</h2>
 
-    <a href="{{ route('paises.create') }}" class="btn btn-primary mb-3">Nuevo País</a>
+<section class="container py-5">
+  <div class="row justify-content-center">
 
-    @if(session('success'))
+    <div class="col-lg-12">
+
+      <h1 class="mb-4 text-center">Listado de Países</h1>
+
+      <!-- Botón crear -->
+      <div class="text-end mb-3">
+        <a href="{{ route('paises.create') }}" class="btn btn-success">
+          <i class="bi bi-plus-circle"></i> Nuevo País
+        </a>
+      </div>
+
+      <!-- Mensaje de éxito -->
+      @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+      @endif
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>País</th>
-                <th>Acciones</th>
-            </tr>
+      <!-- Tabla -->
+      <table id="tbl_paises" class="table table-bordered table-striped table-hover align-middle">
+
+        <thead class="table-success text-center">
+          <tr>
+            <th>ID</th>
+            <th>País</th>
+            <th>Acciones</th>
+          </tr>
         </thead>
-        <tbody>
-            @foreach($paises as $p)
-                <tr>
-                    <td>{{ $p->id_pais }}</td>
-                    <td>{{ $p->pais }}</td>
-                    <td>
-                        <a href="{{ route('paises.edit', $p->id_pais) }}" class="btn btn-warning btn-sm">Editar</a>
 
-                        <form action="{{ route('paises.destroy', $p->id_pais) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button onclick="return confirm('¿Seguro?')" class="btn btn-danger btn-sm">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
+        <tbody>
+          @foreach($paises as $p)
+          <tr>
+            <td>{{ $p->id_pais }}</td>
+            <td>{{ $p->pais }}</td>
+
+            <td class="text-center">
+
+              <!-- Editar -->
+              <a href="{{ route('paises.edit', $p->id_pais) }}" class="btn btn-outline-warning btn-sm" title="Editar">
+                <i class="bi bi-pencil"></i>
+              </a>
+
+              <!-- Eliminar SweetAlert -->
+              <form action="{{ route('paises.destroy', $p->id_pais) }}" 
+                    method="POST" 
+                    class="d-inline form-eliminar">
+                @csrf
+                @method('DELETE')
+
+                <button class="btn btn-outline-danger btn-sm" title="Eliminar">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </form>
+
+            </td>
+          </tr>
+          @endforeach
         </tbody>
-    </table>
-</div>
+
+      </table>
+
+    </div>
+  </div>
+</section>
+
 @endsection
 
 @push('scripts')
+<!-- SweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!-- DataTables -->
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const forms = document.querySelectorAll('.form-eliminar');
+  $(document).ready(function () {
 
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "Esta acción no se puede deshacer.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
-        });
+    // Inicializar DataTables con exportaciones
+    $('#tbl_paises').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.13.4/i18n/es-ES.json'
+      }
     });
 
+    // Confirmación de eliminar
+    $('.form-eliminar').submit(function (e) {
+      e.preventDefault();
+      let form = this;
+
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'Esta acción no se puede deshacer.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          form.submit();
+        }
+      });
+    });
+
+    // Mensaje de éxito con SweetAlert
     @if (session('message'))
-        Swal.fire({
-            title: '¡Éxito!',
-            text: '{{ session('message') }}',
-            icon: 'success'
-        });
+      Swal.fire({
+        title: '¡Éxito!',
+        text: '{{ session('message') }}',
+        icon: 'success'
+      });
     @endif
-});
+
+  });
 </script>
+
+<!-- Estilos para la tabla -->
+<style>
+  table#tbl_paises {
+    width: 100%;
+    table-layout: auto;
+  }
+  table#tbl_paises th, table#tbl_paises td {
+    white-space: nowrap;
+    text-align: center;
+  }
+</style>
 @endpush
