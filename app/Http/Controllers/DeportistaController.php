@@ -18,7 +18,7 @@ class DeportistaController extends Controller
     {
         //
         $deportistas = Deportista::all();
-        return view('deportista.index', compact('deportistas'))-> with('message', 'El deportista ha sido creado exitosamente');
+        return view('deportista.index', compact('deportistas'));
     }
 
     /**
@@ -29,7 +29,7 @@ class DeportistaController extends Controller
         //
         $paises = Pais::all();
         $disciplinas = Disciplina::all();
-        return view('deportista.nuevo', compact('paises', 'disciplinas'))-> with('message', 'El deportista ha sido creado exitosamente');
+        return view('deportista.nuevo', compact('paises', 'disciplinas'));
     }
 
     /**
@@ -47,7 +47,7 @@ class DeportistaController extends Controller
             'id_disciplina' => $request->id_disciplina
         ];
         Deportista::create($deportista);
-        return redirect()->route('deportista.index')->with('success', 'El deportista ha sido creado');
+        return redirect()->route('deportista.index');
     }
 
     /**
@@ -67,7 +67,7 @@ class DeportistaController extends Controller
         $deportista = Deportista::find($id);
         $paises = Pais::all();
         $disciplinas = Disciplina::all();
-        return view('deportista.editar', compact('deportista', 'paises', 'disciplinas')) -> with('message', 'El deportista ha sido actualizado exitosamente');
+        return view('deportista.editar', compact('deportista', 'paises', 'disciplinas'));
     }
 
     /**
@@ -84,7 +84,7 @@ class DeportistaController extends Controller
         $deportista->id_pais = $request->id_pais;
         $deportista->id_disciplina = $request->id_disciplina;
         $deportista->save();
-        return redirect()->route('deportista.index')->with('success', 'El deportista ha sido actualizado');
+        return redirect()->route('deportista.index');
     }
 
     /**
@@ -95,6 +95,6 @@ class DeportistaController extends Controller
         //
         $deportista = Deportista::find($id);
         $deportista->delete();
-        return redirect()->route('deportista.index')->with('success', 'El deportista ha sido eliminado');
+        return redirect()->route('deportista.index');
     }
 }

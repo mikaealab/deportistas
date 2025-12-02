@@ -16,7 +16,7 @@ class DisciplinaController extends Controller
     {
         //
         $disciplinas = Disciplina::all();
-        return view('disciplina.index', compact('disciplinas'))-> with('message', 'La disciplina ha sido creada exitosamente');
+        return view('disciplina.index', compact('disciplinas'));
     }
 
     /**
@@ -25,7 +25,7 @@ class DisciplinaController extends Controller
     public function create()
     {
         //
-        return view('disciplina.nuevo')-> with('message', 'La disciplina ha sido creada exitosamente');
+        return view('disciplina.nuevo');
     }
 
     /**
@@ -38,7 +38,7 @@ class DisciplinaController extends Controller
             'disciplina' => $request->disciplina
         ];
         Disciplina::create($disciplina);
-        return redirect()->route('disciplina.index')->with('success', 'La disciplina ha sido creada');
+        return redirect()->route('disciplina.index');
     }
 
     /**
@@ -56,7 +56,7 @@ class DisciplinaController extends Controller
     {
         //
         $disciplina = Disciplina::find($id);
-        return view('disciplina.editar', compact('disciplina'))-> with('message', 'La disciplina ha sido actualizada exitosamente');
+        return view('disciplina.editar', compact('disciplina'));
     }
 
     /**
@@ -68,7 +68,7 @@ class DisciplinaController extends Controller
         $disciplina = Disciplina::find($id);
         $disciplina->disciplina = $request->disciplina;
         $disciplina->save();
-        return redirect()->route('disciplina.index')->with('success', 'La disciplina ha sido actualizada');
+        return redirect()->route('disciplina.index');
     }
 
     /**
@@ -79,6 +79,6 @@ class DisciplinaController extends Controller
         //
         $disciplina = Disciplina::find($id);
         $disciplina->delete();
-        return redirect()->route('disciplina.index')->with('success', 'La disciplina ha sido eliminada');
+        return redirect()->route('disciplina.index');
     }
 }
