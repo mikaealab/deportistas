@@ -1,3 +1,6 @@
+@extends('layout.app')
+
+@section('Contenido')
 <div class="container">
     <h2>Nuevo Deportista</h2>
 
@@ -47,4 +50,5 @@
         <button class="btn btn-success">Guardar</button>
         <a href="{{ route('deportista.index') }}" class="btn btn-secondary">Volver</a>
     </form>
-</div>  
+</div> 
+@endsection

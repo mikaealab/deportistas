@@ -1,3 +1,6 @@
+@extends('layout.app')
+
+@section('Contenido')
 <div class="container">
     <h2>Editar Deportista</h2>
 
@@ -49,3 +52,4 @@
         <a href="{{ route('deportista.index') }}" class="btn btn-secondary">Volver</a>
     </form>
 </div>
+@endsection
