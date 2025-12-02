@@ -16,7 +16,7 @@ class PaisController extends Controller
     {
         //
         $paises = Pais::all();
-        return view('paises.index', compact('paises'));
+        return view('paises.index', compact('paises')) -> with('message', 'El país ha sido Creado exitosamente');
     }
 
     /**
@@ -25,7 +25,7 @@ class PaisController extends Controller
     public function create()
     {
         //
-        return view('paises.nuevo');
+        return view('paises.nuevo') -> with('message', 'El país ha sido creado exitosamente');
     }
 
     /**
@@ -56,7 +56,7 @@ class PaisController extends Controller
     {
         //
         $pais = Pais::find($id);
-        return view('paises.editar', compact('pais'));
+        return view('paises.editar', compact('pais'))-> with('message', 'El país ha sido actualizado exitosamente');
     }
 
     /**

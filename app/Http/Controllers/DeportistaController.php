@@ -18,7 +18,7 @@ class DeportistaController extends Controller
     {
         //
         $deportistas = Deportista::all();
-        return view('deportista.index', compact('deportistas'));
+        return view('deportista.index', compact('deportistas'))-> with('message', 'El deportista ha sido creado exitosamente');
     }
 
     /**
@@ -29,7 +29,7 @@ class DeportistaController extends Controller
         //
         $paises = Pais::all();
         $disciplinas = Disciplina::all();
-        return view('deportista.nuevo', compact('paises', 'disciplinas'));
+        return view('deportista.nuevo', compact('paises', 'disciplinas'))-> with('message', 'El deportista ha sido creado exitosamente');
     }
 
     /**
@@ -67,7 +67,7 @@ class DeportistaController extends Controller
         $deportista = Deportista::find($id);
         $paises = Pais::all();
         $disciplinas = Disciplina::all();
-        return view('deportista.editar', compact('deportista', 'paises', 'disciplinas'));
+        return view('deportista.editar', compact('deportista', 'paises', 'disciplinas')) -> with('message', 'El deportista ha sido actualizado exitosamente');
     }
 
     /**

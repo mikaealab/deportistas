@@ -16,7 +16,7 @@ class DisciplinaController extends Controller
     {
         //
         $disciplinas = Disciplina::all();
-        return view('disciplina.index', compact('disciplinas'));
+        return view('disciplina.index', compact('disciplinas'))-> with('message', 'La disciplina ha sido creada exitosamente');
     }
 
     /**
@@ -25,7 +25,7 @@ class DisciplinaController extends Controller
     public function create()
     {
         //
-        return view('disciplina.nuevo');
+        return view('disciplina.nuevo')-> with('message', 'La disciplina ha sido creada exitosamente');
     }
 
     /**
@@ -56,7 +56,7 @@ class DisciplinaController extends Controller
     {
         //
         $disciplina = Disciplina::find($id);
-        return view('disciplina.editar', compact('disciplina'));
+        return view('disciplina.editar', compact('disciplina'))-> with('message', 'La disciplina ha sido actualizada exitosamente');
     }
 
     /**
