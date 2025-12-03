@@ -26,7 +26,11 @@
                     @csrf
 
                     <label for="disciplina">Nombre de la disciplina</label>
-                    <input type="text" name="disciplina" id="disciplina" class="form-control" required>
+                    <input type="text" name="disciplina" id="disciplina" class="form-control" required
+                    value="{{ old('disciplina') }}">
+                    @error ('disciplina')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                     <br>
 
                     <div class="text-center mt-4">

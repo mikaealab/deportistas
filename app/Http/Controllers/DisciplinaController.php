@@ -34,12 +34,21 @@ class DisciplinaController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'disciplina' => 'required|unique:disciplina,disciplina'
+        ],
+        [
+            'disciplina.required' => 'El nombre de la disciplina es obligatorio.',
+            'disciplina.unique' => 'La disciplina ya existe en la base de datos.'
+        ]);
+        //
         $disciplina = [
             'disciplina' => $request->disciplina
         ];
         Disciplina::create($disciplina);
-        return redirect()->route('disciplina.index');
+        return redirect()->route('disciplina.index')->with('message', 'Disciplina creada correctamente.');
     }
+        
 
     /**
      * Display the specified resource.
