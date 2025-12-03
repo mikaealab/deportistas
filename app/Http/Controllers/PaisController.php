@@ -37,6 +37,7 @@ class PaisController extends Controller
         $request->validate([
             'pais' => 'required|unique:pais,pais'
         ],
+        
         [
             'pais.required' => 'El nombre del país es obligatorio.',
             'pais.unique' => 'El país ya existe en la base de datos.'
