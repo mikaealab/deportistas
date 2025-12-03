@@ -120,6 +120,29 @@
   });
 </script>
 
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: '¡No se puede eliminar!',
+        text: '{{ session('error') }}',
+        confirmButtonColor: '#d33',
+    });
+</script>
+@endif
+
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: '¡Operación exitosa!',
+        text: '{{ session('success') }}',
+        confirmButtonColor: '#3085d6',
+    });
+</script>
+@endif
+
+
 <!-- Estilos para la tabla -->
 <style>
   table#tbl_paises {
