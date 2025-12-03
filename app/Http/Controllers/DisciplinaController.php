@@ -74,11 +74,18 @@ class DisciplinaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
-        $disciplina = Disciplina::find($id);
+        $disciplina = Disciplina::findOrFail($id);
+
+        // Verificar si hay deportistas relacionados
+        if ($disciplina->deportistas()->count() > 0) {
+            return redirect()->back()->with('error', 'No se puede eliminar esta disciplina porque tiene deportistas relacionados.');
+        }
+
         $disciplina->delete();
-        return redirect()->route('disciplina.index');
+
+        return redirect()->back()->with('success', 'Disciplina eliminada correctamente.');
     }
+
 }

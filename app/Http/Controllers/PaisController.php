@@ -75,20 +75,20 @@ class PaisController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-{
-    $pais = Pais::findOrFail($id);
+    {
+        $pais = Pais::findOrFail($id);
 
-    // Verificar si tiene deportistas relacionados
-    if ($pais->deportistas()->count() > 0) {
+        // Verificar si tiene deportistas relacionados
+        if ($pais->deportistas()->count() > 0) {
+            return redirect()->route('paises.index')
+                ->with('error', 'No se puede eliminar este país porque tiene deportistas asociados.');
+        }
+
+        // Si no tiene relaciones, se elimina
+        $pais->delete();
+
         return redirect()->route('paises.index')
-            ->with('error', 'No se puede eliminar este país porque tiene deportistas asociados.');
+            ->with('success', 'País eliminado correctamente.');
     }
-
-    // Si no tiene relaciones, se elimina
-    $pais->delete();
-
-    return redirect()->route('paises.index')
-        ->with('success', 'País eliminado correctamente.');
-}
 
 }
