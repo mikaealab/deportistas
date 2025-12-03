@@ -26,7 +26,11 @@
                     @csrf
 
                     <label for="pais">Nombre del país</label>
-                    <input type="text" name="pais" id="pais" class="form-control" required>
+                    <input type="text" name="pais" id="pais" class="form-control" required
+                    value="{{ old('pais') }}">
+                    @error ('pais')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                     <br>
 
                     <div class="text-center mt-4">

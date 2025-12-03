@@ -33,12 +33,20 @@ class PaisController extends Controller
      */
     public function store(Request $request)
     {
+        // Verificar si ya existe un país con el mismo nombre
+        $request->validate([
+            'pais' => 'required|unique:pais,pais'
+        ],
+        [
+            'pais.required' => 'El nombre del país es obligatorio.',
+            'pais.unique' => 'El país ya existe en la base de datos.'
+        ]);
         //
         $pais = [
             'pais' => $request->pais
         ];
         Pais::create($pais);
-        return redirect()->route('paises.index');
+        return redirect()->route('paises.index')->with('message', 'País creado correctamente.');
     }
 
     /**
