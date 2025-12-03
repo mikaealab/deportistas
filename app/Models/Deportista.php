@@ -24,6 +24,7 @@ class Deportista extends Model
     {
         return $this->belongsTo(Pais::class , 'id_pais');
     }
+    
     public function disciplina()
     {
         return $this->belongsTo(Disciplina::class , 'id_disciplina');

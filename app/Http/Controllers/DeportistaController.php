@@ -92,9 +92,14 @@ class DeportistaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
-        $deportista = Deportista::find($id);
-        $deportista->delete();
-        return redirect()->route('deportista.index');
+        try {
+            $deportista = Deportista::find($id);
+            $deportista->delete();
+            return redirect()->route('deportista.index')
+                ->with('success', 'Deportista eliminado correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->route('deportista.index')
+                ->with('error', 'No se puede eliminar el deportista.');
+        }
     }
 }
