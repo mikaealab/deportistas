@@ -6,8 +6,8 @@ use App\Http\Controllers\DisciplinaController;
 use App\Http\Controllers\DeportistaController;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');   // <-- Aquí cambiaste welcome por home
+})->name('home');
 
 Route::resource('paises', PaisController::class);
 
